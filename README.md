@@ -1,4 +1,4 @@
-#eo
+# educational origin
 
 ##### common-conf
 ##### common-maven
