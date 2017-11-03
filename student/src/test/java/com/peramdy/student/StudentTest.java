@@ -1,43 +1,37 @@
 package com.peramdy.student;
 
-import org.junit.Test;
-
-import com.ctrip.framework.apollo.Config;
-import com.ctrip.framework.apollo.ConfigService;
-import com.ctrip.framework.apollo.spring.annotation.ApolloConfig;
-
 /**
- *  
- * @author peramdy  
- * @version   
+ *
+ * @author peramdy
+ * @version
  * @since JDK 1.7
- * 
+ *
  */
 public class StudentTest {
-	
-	
-	@ApolloConfig
-	private Config config;
-	
+
+
+//	@ApolloConfig
+//	private Config config;
+
 	/**
-	 * 
+	 *
 	 * testOne:
-	 *  
-	 * @author peramdy    
+	 *
+	 * @author peramdy
 	 * @since JDK 1.7
 	 */
-	@Test
+//	@Test
 	public void testOne() {
-		
+
 	}
-	
-	
-	@Test
+
+
+//	@Test
 	public void testApolloConfig() {
-					
+
 //	    config = ConfigService.getConfig("10001.hello");
-		String value= config.getProperty("test", "0");
-		System.out.println(value);
+//		String value= config.getProperty("test", "0");
+//		System.out.println(value);
 	}
 
 }
