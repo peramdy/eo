@@ -1,5 +1,5 @@
 <html>
 <body>
-<h2>Hello Common-maven!</h2>
+<h2>Hello Common-soa!</h2>
 </body>
 </html>

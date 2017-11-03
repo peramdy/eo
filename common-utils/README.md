@@ -1,9 +1,1 @@
-#eo
-
-##### common-conf
-##### common-maven
-##### common-utils
-##### student
-##### studentSoa
-##### teacher
-##### teacherSoa
+# common-utils

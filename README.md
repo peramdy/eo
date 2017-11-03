@@ -1,6 +1,6 @@
 # educational origin
 
-##### common-conf
+##### common-soa
 ##### common-maven
 ##### common-utils
 ##### student
