@@ -1,0 +1,71 @@
+a.无数据源的spring-mvc
+
+>>>>
+1.依赖
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-context</artifactId>
+    <version>5.0.2.RELEASE</version>
+</dependency>
+
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-webmvc</artifactId>
+    <version>5.0.2.RELEASE</version>
+</dependency>
+
+>>>>
+2.web.xml中的配置
+<listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+</listener>
+<context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:spring/spring-application.xml</param-value>
+</context-param>
+<servlet>
+    <servlet-name>springMvc</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:spring/spring-application.xml</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+</servlet>
+<servlet-mapping>
+    <servlet-name>springMvc</servlet-name>
+    <url-pattern>*.action</url-pattern>
+</servlet-mapping>
+
+>>>>
+3.spring-application.xml 中的配置
+<context:component-scan base-package="com.peramdy"/>
+<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <property name="prefix" value="/WEB-INF/jsp/"/>
+    <property name="suffix" value=".jsp"/>
+</bean>
+
+>>>>
+4.controller 层的代码
+/**
+ * @author peramdy
+ * @date 2017/12/14.
+ */
+@Controller
+@RequestMapping(value = "/spring")
+public class SpringController {
+    @GetMapping(value = "/january.action")
+    @ResponseBody
+    public String january() {
+        System.out.println("hello january!");
+        return "hello january!";
+    }
+
+    @GetMapping("/helloJanuary.action")
+    public ModelAndView helloJanuary() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("january");
+        return mv;
+    }
+}
+

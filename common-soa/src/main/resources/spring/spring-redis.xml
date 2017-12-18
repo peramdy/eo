@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/cache
+           http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+
+    <!-- redisPool -->
+    <bean id="redisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <!-- <property name="minIdle" value="${redis.minIdle}"/>
+         <property name="maxWaitMillis" value="${redis.maxWaitMillis}"/>
+         <property name="maxIdle" value="${redis.maxIdle}"/>
+         <property name="blockWhenExhausted" value="${redis.blockWhenExhausted}"/>
+         <property name="maxTotal" value="${redis.maxActive}"/>
+         <property name="testOnBorrow" value="${redis.testOnBorrow}"/>
+         <property name="testOnReturn" value="${redis.testOnReturn}"/>-->
+        <property name="minIdle" value="100"/>
+        <property name="maxWaitMillis" value="10000"/>
+        <property name="maxIdle" value="300"/>
+        <property name="blockWhenExhausted" value="false"/>
+        <property name="maxTotal" value="2048"/>
+        <property name="testOnBorrow" value="true"/>
+        <property name="testOnReturn" value="false"/>
+    </bean>
+
+
+    <bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <property name="hostName" value="192.168.136.130"/>
+        <property name="port" value="16379"/>
+        <property name="poolConfig" ref="redisPoolConfig"/>
+    </bean>
+
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="keySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <property name="valueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+        </property>
+    </bean>
+
+    <!--<bean id="connectionFactory" class="org.springframework.data.redis.connection.RedisStandaloneConfiguration">
+        <property name="hostName" value="${redis.host}"/>
+        <property name="port" value="${redis.port}"/>
+        &lt;!&ndash;<property name="password" value="${redis.password}"/>&ndash;&gt;
+        <property name="database" value=""></property>
+    </bean>-->
+
+
+    <!-- custom redis start -->
+    <bean id="genericObjectPoolConfig" class="org.apache.commons.pool2.impl.GenericObjectPoolConfig">
+        <property name="maxTotal" value="2048"/>
+        <property name="maxIdle" value="300"/>
+        <property name="minIdle" value="100"/>
+        <property name="testOnReturn" value="false"/>
+        <property name="testOnBorrow" value="true"/>
+        <property name="blockWhenExhausted" value="false"/>
+    </bean>
+
+    <bean id="customRedisBuilder" class="com.peramdy.redis.CustomRedisBuilder">
+        <property name="genericObjectPoolConfig" ref="genericObjectPoolConfig"/>
+        <property name="host" value="192.168.136.130"/>
+        <property name="port" value="16379"/>
+        <property name="addressConfigs" value="192.168.136.130:16379"/>
+        <property name="maxAttempts" value="100"/>
+    </bean>
+
+    <bean id="customRedis" factory-bean="customRedisBuilder" factory-method="build" destroy-method="close"/>
+
+    <bean id="customRedisUtils" class="com.peramdy.redis.CustomRedisUtils">
+        <constructor-arg ref="customRedis"/>
+    </bean>
+    <!-- custom redis end -->
+
+    <!--<bean id="springCacheRedisManager" class="com.peramdy.redis.SpringCacheRedisManager"/>-->
+
+    <!--<cache:annotation-driven cache-manager="springCacheRedisManager"/>-->
+
+
+</beans>
