@@ -15,7 +15,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Created by peramdy on 2017/12/18.
+ * @author peramdy
+ * @date 2017/12/18
  */
 public class SerializeUtils {
 

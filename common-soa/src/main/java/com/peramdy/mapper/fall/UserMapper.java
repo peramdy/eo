@@ -17,4 +17,14 @@ public interface UserMapper {
      */
     User queryUserInfoById(@Param("id") Integer id);
 
+    /**
+     * 查询
+     *
+     * @param id
+     * @param classId
+     * @return
+     */
+    User queryUserInfoByIdAndClassId(@Param("id") Integer id, @Param("classId") Integer classId);
+
+
 }

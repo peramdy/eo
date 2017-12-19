@@ -115,6 +115,11 @@ public class SpringController {
     }
 
 
+    /**
+     * error
+     *
+     * @return
+     */
     @GetMapping("/testHttpClient.action")
     @ResponseBody
     public String testHttpClient() {

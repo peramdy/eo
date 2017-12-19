@@ -1,4 +1,4 @@
-package com.peramdy.Filter;
+package com.peramdy.filter;
 
 import com.alibaba.druid.filter.stat.StatFilter;
 

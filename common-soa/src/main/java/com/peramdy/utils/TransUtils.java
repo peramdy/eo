@@ -10,7 +10,20 @@ import java.lang.reflect.Method;
  */
 public class TransUtils {
 
-    public static  <S, D> D smipleConvertor(S source, Class<D> destination) {
+    /**
+     * simple converter
+     *
+     * @param source
+     * @param destination
+     * @param <S>
+     * @param <D>
+     * @return
+     */
+    public static <S, D> D simpleConverter(S source, Class<D> destination) {
+
+        if (source == null) {
+            return null;
+        }
 
         D des = null;
         Field[] fields = source.getClass().getDeclaredFields();

@@ -1,6 +1,5 @@
 package com.peramdy.service.fall;
 
-import com.peramdy.entity.User;
 import com.peramdy.model.UserDto;
 
 /**
@@ -23,5 +22,15 @@ public interface FallService {
      * @return
      */
     UserDto queryById(Integer id);
+
+
+    /**
+     * query
+     *
+     * @param id
+     * @param classId
+     * @return
+     */
+    UserDto queryById(Integer id, Integer classId);
 
 }

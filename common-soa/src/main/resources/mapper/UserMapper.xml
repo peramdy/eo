@@ -13,4 +13,17 @@
             s.id = #{id}
     </select>
 
+    <select id="queryUserInfoByIdAndClassId" resultType="com.peramdy.entity.User">
+        SELECT
+        s.id AS id,
+        s.stuName AS name,
+        s.classId AS classId
+        FROM
+        student s
+        WHERE
+        s.id = #{id}
+        AND
+        s.classId=#{classId}
+    </select>
+
 </mapper>

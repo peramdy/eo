@@ -1,6 +1,9 @@
 package com.peramdy.controller.autumn;
 
+import com.peramdy.model.UserDto;
 import com.peramdy.service.fall.FallService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,10 +33,18 @@ public class AutumnController {
         return fallService.sayHelloToFall();
     }
 
-    @RequestMapping(value = "/query.action", produces = {"application/json;charset=UTF-8"})
-    @ResponseBody
-    public String query(@RequestParam("id") Integer id) {
-        return fallService.queryById(id).toString();
+
+    @PostMapping(value = "/query.action")
+    public ResponseEntity<?> query(@RequestParam("id") Integer id) {
+        UserDto dto = fallService.queryById(id);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/queryInfo.action")
+    public ResponseEntity<?> query(@RequestParam("id") Integer id,
+                                   @RequestParam("classId") Integer classId) {
+        UserDto dto = fallService.queryById(id, classId);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
 }

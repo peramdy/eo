@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
        xmlns:cache="http://www.springframework.org/schema/cache"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -27,11 +28,8 @@
     </bean>
 
 
-    <bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
-        <property name="hostName" value="192.168.136.130"/>
-        <property name="port" value="16379"/>
-        <property name="poolConfig" ref="redisPoolConfig"/>
-    </bean>
+    <bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+          p:hostName="192.168.136.130" p:port="16379" p:poolConfig-ref="redisPoolConfig"/>
 
     <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
         <property name="connectionFactory" ref="connectionFactory"/>
@@ -76,9 +74,32 @@
     </bean>
     <!-- custom redis end -->
 
-    <!--<bean id="springCacheRedisManager" class="com.peramdy.redis.SpringCacheRedisManager"/>-->
 
-    <!--<cache:annotation-driven cache-manager="springCacheRedisManager"/>-->
+    <!-- cache -->
+    <cache:annotation-driven cache-manager="redisCacheManager"/>
 
+    <!-- custom cacheManager -->
+    <bean id="redisCacheManager" class="com.peramdy.redis.spring.MyCacheManager">
+        <property name="caches">
+            <set>
+                <bean class="com.peramdy.redis.spring.MyCache"
+                      p:name="student"/>
+            </set>
+        </property>
+    </bean>
+
+    <!-- spring cacheManager -->
+
+    <!--<bean id="cacheManager"
+          class="org.springframework.cache.support.SimpleCacheManager">
+        <property name="caches">
+            <set>
+                <bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"
+                      p:name="default"/>
+                <bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"
+                      p:name="student"/>
+            </set>
+        </property>
+    </bean>-->
 
 </beans>

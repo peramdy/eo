@@ -5,6 +5,7 @@ import com.peramdy.mapper.fall.UserMapper;
 import com.peramdy.model.UserDto;
 import com.peramdy.service.fall.FallService;
 import com.peramdy.utils.TransUtils;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -24,10 +25,20 @@ public class FallServiceImpl implements FallService {
         return "hello fall";
     }
 
+    @Cacheable("student")
     @Override
     public UserDto queryById(Integer id) {
         User user = userMapper.queryUserInfoById(id);
-        UserDto dto = TransUtils.smipleConvertor(user, UserDto.class);
+        UserDto dto = TransUtils.simpleConverter(user, UserDto.class);
+        return dto;
+    }
+
+
+    @Cacheable(value = "student", key = "T(String).valueOf(#id).concat('-').concat(#classId)")
+    @Override
+    public UserDto queryById(Integer id, Integer classId) {
+        User user = userMapper.queryUserInfoByIdAndClassId(id, classId);
+        UserDto dto = TransUtils.simpleConverter(user, UserDto.class);
         return dto;
     }
 
