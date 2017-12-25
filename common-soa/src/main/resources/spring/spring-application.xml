@@ -9,7 +9,7 @@
     <import resource="spring-mvc.xml"/>
     <import resource="spring-data.xml"/>
     <import resource="spring-redis.xml"/>
-    <context:property-placeholder location="classpath:conf/jdbc.properties"/>
-    <context:property-placeholder location="classpath:conf/server.properties"/>
-    <context:property-placeholder location="classpath:conf/redis.properties"/>
+    <context:property-placeholder location="classpath:conf/*.properties"/>
+    <!--    <context:property-placeholder location="classpath:conf/test/server.properties"/>
+        <context:property-placeholder location="classpath:conf/pro/redis.properties"/>-->
 </beans>

@@ -28,9 +28,9 @@
         </profile>
 
         <profile>
-            <id>prod</id>
+            <id>pro</id>
             <properties>
-                <env>prod</env>
+                <env>pro</env>
             </properties>
         </profile>
     </profiles>
@@ -187,19 +187,28 @@
         <sourceDirectory>src/main/java</sourceDirectory>
         <resources>
             <resource>
-                <directory>src/resources</directory>
+                <directory>src/main/resources</directory>
                 <filtering>true</filtering>
+                <!-- includes  excludes 两者选选其一 -->
+                <!--<includes>-->
+                <!--<include>mapper/*</include>-->
+                <!--<include>spring/*</include>-->
+                <!--<include>conf/*.properties</include>-->
+                <!--</includes>-->
+
+                <excludes>
+                    <exclude>conf/dev/*</exclude>
+                    <exclude>conf/pro/*</exclude>
+                    <exclude>conf/test/*</exclude>
+                </excludes>
             </resource>
+
+            <!-- 此处可省 war插件中的webResources已配置 -->
             <resource>
                 <directory>src/main/resources/conf/${env}</directory>
-                <includes>
-                    <include>dubbo.properties</include>
-                    <include>jdbc.properties</include>
-                    <include>log4j.properties</include>
-                    <include>redis.properties</include>
-                    <include>server.properties</include>
-                </includes>
+                <targetPath>src/main/resources/conf</targetPath>
             </resource>
+
         </resources>
 
         <plugins>
@@ -243,7 +252,7 @@
                         <resource>
                             <!-- this is relative to the pom.xml directory -->
                             <directory>src/main/resources/conf/${env}</directory>
-                            <targetPath>WEB-INF/classes</targetPath>
+                            <targetPath>WEB-INF/classes/conf</targetPath>
                             <filtering>true</filtering>
                         </resource>
                     </webResources>
@@ -255,10 +264,7 @@
                     </archive>
                 </configuration>
             </plugin>
-
         </plugins>
-
-
     </build>
 
 
