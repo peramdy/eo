@@ -8,4 +8,6 @@ spring mvc
 mybatis
 druidView
 redisCacheManager
+apollo 
+maven profiles
 ````

@@ -129,6 +129,14 @@
             <version>1.7.25</version>
         </dependency>
 
+        <!-- log4j -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+
+
         <!-- jedis -->
         <dependency>
             <groupId>redis.clients</groupId>
@@ -177,6 +185,13 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.9.2</version>
+        </dependency>
+
+        <!-- apollo 配置中心 -->
+        <dependency>
+            <groupId>com.ctrip.framework.apollo</groupId>
+            <artifactId>apollo-client</artifactId>
+            <version>0.9.1-SNAPSHOT</version>
         </dependency>
 
     </dependencies>
